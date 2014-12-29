@@ -4,9 +4,9 @@ import smbus
 import time
 import logging
 
-import I2CInfo
+import Cap
 
-class Adafruit_CAP1188(object):
+class Adafruit_CAP1188(Cap):
 
     """
     (embryonic) Python interface for the Adafruit CAP1188 8-pad capacitive
@@ -72,21 +72,6 @@ class Adafruit_CAP1188(object):
     CFG2_INV_LINK_TRAN  = 0x01 << 7 # linked LED transition controls (sec 5.29)
     CFG2_ENABLE_ALL     = 0xff
 
-
-
-    def __init__(self, i2c_addr, i2c_bus, touch_offset = 0):
-
-        """
-        i2c_addr: the address of the device on the given i2c bus
-        i2c_bus: the SMBus instance to use for this device.
-        touch_offset: If provided, an offset to be applied to the
-                      reported touch indices (helpful when chaining
-                      multiple units)
-        """
-
-        self._i2c = I2CInfo(i2c_bus, i2c_addr)
-        self._touch_offset = touch_offset
-
     def __str__(self):
         ret =  self.driver_name + "\n"
         ret += "  mfg_id:       %s\n" % self.manufacturer_id
@@ -96,25 +81,6 @@ class Adafruit_CAP1188(object):
         ret += "  leds_linked:  %s\n" % self.leds_linked
         ret += "  touch_offset: %s\n" % self.touch_offset
         return ret
-
-    @property
-    def is_i2c(self):
-
-        """
-        Returns true if we're configured to use I2C, false otherwise.
-        """
-
-        return self._i2c is not None
-
-    @property
-    def is_spi(self):
-
-        """
-        Returns true if we're configured to use SPI, false otherwise.
-        """
-
-        # TODO really implement this
-        return not self.is_i2c
 
     def write_register(self, register, value):
 

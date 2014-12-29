@@ -4,9 +4,9 @@
 import smbus
 bus = smbus.SMBus(1)
 
-import I2CInfo
+import Cap
 
-class Adafruit_CAP1188(object):
+class Adafruit_MPR121(Cap):
 
 	# MPR121 Register Defines
 	MHD_R = 0x2B
@@ -62,16 +62,7 @@ class Adafruit_CAP1188(object):
 	REL_THRESH = 0x0A
 
 	def __init__(self, i2c_addr, i2c_bus, touch_offset = 0):
-		"""
-        i2c_addr: the address of the device on the given i2c bus
-        i2c_bus: the SMBus instance to use for this device.
-        touch_offset: If provided, an offset to be applied to the
-                      reported touch indices (helpful when chaining
-                      multiple units)
-        """
-
-        self._i2c = I2CInfo(i2c_bus, i2c_addr)
-        self._touch_offset = touch_offset
+		super(MPR121,self).__init__(self, i2c_addr, i2c_bus, touch_offset)
         self.setup()
 
 	# Routines
