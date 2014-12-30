@@ -1,5 +1,5 @@
 
-import I2CInfo
+from I2CInfo import I2CInfo as I2C
 
 class Captivity(object):
 
@@ -12,7 +12,7 @@ class Captivity(object):
 		              multiple units)
 	"""
 	def __init__(self, i2c_addr, i2c_bus, touch_offset = 0):
-		self._i2c = I2CInfo(i2c_bus, i2c_addr)
+		self._i2c = I2C(i2c_bus, i2c_addr)
 		self._touch_offset = touch_offset
 
 	# Writes the given value to the given register as a single transaction and returns the result.

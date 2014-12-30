@@ -3,9 +3,9 @@
 import time
 import logging
 
-import Cap
+from Cap import Captivity
 
-class Adafruit_CAP1188(Cap):
+class Adafruit_CAP1188(Captivity):
 
     """
     (embryonic) Python interface for the Adafruit CAP1188 8-pad capacitive

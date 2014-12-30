@@ -4,9 +4,9 @@
 import smbus
 bus = smbus.SMBus(1)
 
-import Cap
+from Cap import Captivity
 
-class Adafruit_MPR121(Cap):
+class Adafruit_MPR121(Captivity):
 
 	# MPR121 Register Defines
 	MHD_R = 0x2B
