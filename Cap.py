@@ -25,22 +25,14 @@ class Captivity(object):
 		if self.is_i2c:
 			return self._i2c.read_byte_data(register)
 
+	# Returns true if we're configured to use I2C, false otherwise.
 	@property
 	def is_i2c(self):
+		return self._i2c is not None
 
-	"""
-	Returns true if we're configured to use I2C, false otherwise.
-	"""
-
-	return self._i2c is not None
-
+	# Returns true if we're configured to use SPI, false otherwise.
 	@property
 	def is_spi(self):
-
-	"""
-	Returns true if we're configured to use SPI, false otherwise.
-	"""
-
-	# TODO really implement this
-	return not self.is_i2c
+		# TODO really implement this
+		return not self.is_i2c
 
