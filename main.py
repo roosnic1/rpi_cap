@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import smbus
 import Adafruit_CAP1188
 
 

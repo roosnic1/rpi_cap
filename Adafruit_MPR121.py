@@ -62,7 +62,7 @@ class Adafruit_MPR121(Cap):
 	REL_THRESH = 0x0A
 
 	def __init__(self, i2c_addr, i2c_bus, touch_offset = 0):
-		super(MPR121,self).__init__(self, i2c_addr, i2c_bus, touch_offset)
+		super(MPR121,self).__init__(i2c_addr, i2c_bus, touch_offset)
         self.setup()
 
 	# Routines

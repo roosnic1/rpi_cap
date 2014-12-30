@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-import smbus
 import time
 import logging
 
@@ -71,6 +70,9 @@ class Adafruit_CAP1188(Cap):
     CFG2_ALT_POL        = 0x01 << 6 # set ALERT# to active low / open drain
     CFG2_INV_LINK_TRAN  = 0x01 << 7 # linked LED transition controls (sec 5.29)
     CFG2_ENABLE_ALL     = 0xff
+
+    def __init__(self, i2c_addr, i2c_bus, touch_offset = 0):
+        super(MPR121,self).__init__(i2c_addr, i2c_bus, touch_offset)
 
     def __str__(self):
         ret =  self.driver_name + "\n"
