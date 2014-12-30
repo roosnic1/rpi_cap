@@ -17,30 +17,30 @@ class Captivity(object):
 
 	# Writes the given value to the given register as a single transaction and returns the result.
 	def write_register(self, register, value):
-        if self.is_i2c:
-            return self._i2c.write_byte_data(register, value)
+		if self.is_i2c:
+			return self._i2c.write_byte_data(register, value)
 
-    # Reads a value from the given register and returns it.
-    def read_register(self, register):
-        if self.is_i2c:
-            return self._i2c.read_byte_data(register)
+	# Reads a value from the given register and returns it.
+	def read_register(self, register):
+		if self.is_i2c:
+			return self._i2c.read_byte_data(register)
 
 	@property
-    def is_i2c(self):
+	def is_i2c(self):
 
-        """
-        Returns true if we're configured to use I2C, false otherwise.
-        """
+	"""
+	Returns true if we're configured to use I2C, false otherwise.
+	"""
 
-        return self._i2c is not None
+	return self._i2c is not None
 
-    @property
-    def is_spi(self):
+	@property
+	def is_spi(self):
 
-        """
-        Returns true if we're configured to use SPI, false otherwise.
-        """
+	"""
+	Returns true if we're configured to use SPI, false otherwise.
+	"""
 
-        # TODO really implement this
-        return not self.is_i2c
+	# TODO really implement this
+	return not self.is_i2c
 
