@@ -67,6 +67,10 @@ class Adafruit_MPR121(Cap):
 
 	# Routines
 
+	@property
+    def driver_name(self):
+        return "Adafruit_MPR121"
+
 	def readData(address):
 		MSB = self._i2c.read_byte_data(address, 0x00)
 		LSB = self._i2c.read_byte_data(address, 0x01)

@@ -82,25 +82,6 @@ class Adafruit_CAP1188(Cap):
         ret += "  touch_offset: %s\n" % self.touch_offset
         return ret
 
-    def write_register(self, register, value):
-
-        """
-        Writes the given value to the given register as a single transaction
-        and returns the result.
-        """
-
-        if self.is_i2c:
-            return self._i2c.write_byte_data(register, value)
-
-    def read_register(self, register):
-
-        """
-        Reads a value from the given register and returns it.
-        """
-
-        if self.is_i2c:
-            return self._i2c.read_byte_data(register)
-
     def reset_interrupt(self):
 
         """
@@ -244,27 +225,3 @@ class Adafruit_CAP1188(Cap):
         if touchval > 0:
             self.reset_interrupt()
         return (i + self._touch_offset for i in range(0, 8) if touchval & 1<<i)
-
-if __name__ == "__main__":
-
-    bus = smbus.SMBus(1)
-    cap1_addr = 0x28
-    cap2_addr = 0x29
-
-    cap1 = Adafruit_CAP1188(cap1_addr, bus)
-    cap2 = Adafruit_CAP1188(cap2_addr, bus, touch_offset = 8)
-
-    # Turn on multitouch
-    cap1.multitouch_enabled = True
-    cap2.multitouch_enabled = True
-
-    # Link LEDs to touches
-    cap1.leds_linked = True
-    cap2.leds_linked = True
-
-    # Speed it up
-    cap1.write_register(Adafruit_CAP1188.STANDBYCFG, 0x30)
-    cap2.write_register(Adafruit_CAP1188.STANDBYCFG, 0x30)
-
-    print cap1
-    print cap2
