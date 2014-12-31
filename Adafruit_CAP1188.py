@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-import time
 import logging
 
 from Cap import Captivity
@@ -34,6 +33,7 @@ class Adafruit_CAP1188(Captivity):
     STANDBYCFG     =  0x41
     REV            =  0xFF
     LEDPOL         =  0x73
+    IRQ            =  0x27
 
     # Calibration Activation (Datasheet 5.11)
     CAL_ACT_REG       = 0x26
@@ -167,6 +167,17 @@ class Adafruit_CAP1188(Captivity):
         )
 
     @property
+    def irq_enabled(self):
+        return self.read_register(Adafruit_CAP1188.IRQ) == 0xFF
+
+    @irq_enabled.setter
+    def irq_enabled(self, enabled):
+        if enabled is True:
+            self.write_register(Adafruit_CAP1188.IRQ, 0xFF)
+        else:
+            self.write_register(Adafruit_CAP1188.IRQ,0)
+
+    @property
     def multitouch_enabled(self):
 
         """
@@ -186,7 +197,8 @@ class Adafruit_CAP1188(Captivity):
             self.write_register(Adafruit_CAP1188.MTBLK, 0)
         else:
             # TODO verify this
-            self.write_register(Adafruit_CAP1188.MTBLK, 1)
+            #self.write_register(Adafruit_CAP1188.MTBLK, 1)
+            self.write_register(Adafruit_CAP1188.MTBLK, 0x80)
 
     @property
     def leds_linked(self):
